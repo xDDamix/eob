@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import pl.dguziak.detailsscreen.arg.toArgs
 import pl.dguziak.detailsscreen.fragment.DetailsScreenFragment
 import pl.dguziak.domain.model.Todo
 import pl.dguziak.listscreen.R
@@ -46,7 +47,7 @@ class ListScreenFragment : BaseFragment<FragmentListScreenBinding>() {
     }
 
     private fun navigateToDetails(todo: Todo) {
-        navigateableActivityViewModel.navigateTo(FragmentChangeData(DetailsScreenFragment(), FragmentTransactionType.REPLACE, true))
+        navigateableActivityViewModel.navigateTo(FragmentChangeData(DetailsScreenFragment.newInstance(todo.toArgs()), FragmentTransactionType.REPLACE, true))
     }
 
     override val viewBindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentListScreenBinding =

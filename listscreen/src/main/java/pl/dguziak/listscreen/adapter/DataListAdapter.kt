@@ -3,8 +3,8 @@ package pl.dguziak.listscreen.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import pl.dguziak.domain.model.Todo
-import pl.dguziak.listscreen.R
 import pl.dguziak.listscreen.databinding.ItemListElementBinding
+import pl.dguziak.sharedresources.util.StatusConverter
 import pl.dguziak.view.adapter.BaseRecyclerViewAdapter
 
 class DataListAdapter(private val onClickAction: (Todo) -> Unit, dataset: MutableList<Todo>) :
@@ -27,17 +27,12 @@ class DataListAdapter(private val onClickAction: (Todo) -> Unit, dataset: Mutabl
                 user.text = data.userId.toString()
                 itemNo.text = data.id.toString()
                 title.text = data.title
-                status.text = convertTaskStatus(data.completed)
+                status.text = StatusConverter.convertBooleanToStatus(viewBinding.root.context.resources, data.completed)
 
                 itemLayout.setOnClickListener {
                     onClickAction.invoke(data)
                 }
             }
         }
-
-        private fun convertTaskStatus(isCompleted: Boolean): String =
-            viewBinding.root.context.getString(
-                if (isCompleted) R.string.task_status_completed else R.string.task_status_pending
-            )
     }
 }

@@ -14,7 +14,6 @@ class EOApp : Application() {
         super.onCreate()
 
         startKoin {
-            //todo: To check if will need that
             androidContext(this@EOApp)
             modules(listOf(
                 splashscreenModule,
