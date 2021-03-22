@@ -15,20 +15,23 @@ private const val SPLASHSCREEN_VISIBILITY_MS = 1000L
 class SplashscreenViewModel: BaseViewModel() {
 
     //todo: Add wrapper to prevent multiple events shoting (eg. onResume() re-send of event)
-    val navigateNextLiveEvent: MutableLiveData<Nothing> by lazy {
+    private val _navigateNextLiveEvent: MutableLiveData<Nothing> by lazy {
         MutableLiveData()
     }
+
+    val navigateNextLiveEvent: LiveData<Nothing>
+        get() = _navigateNextLiveEvent
 
     init {
         Log.d("EOApp", "SplashscreenViewModel init ")
         loadData()
     }
 
-    fun loadData() {
+    private fun loadData() {
         viewModelScope.launch {
             withContext(Dispatchers.Default) {
                 delay(SPLASHSCREEN_VISIBILITY_MS)
-                navigateNextLiveEvent.postValue(null)
+                _navigateNextLiveEvent.postValue(null)
             }
         }
     }

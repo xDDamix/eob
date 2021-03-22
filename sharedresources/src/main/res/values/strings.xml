@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="task_status_completed">COMPLETED</string>
+    <string name="task_status_pending">PENDING</string>
+
+    <string name="user_info_label">User:</string>
+    <string name="item_no_info_label">Item no.:</string>
+</resources>

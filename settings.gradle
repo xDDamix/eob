@@ -1,9 +1,11 @@
+include ':sharedresources'
+include ':data'
+include ':navigation'
 include ':core'
 include ':view'
 include ':listscreen'
 include ':detailsscreen'
 include ':splashscreen'
 include ':domain'
-include ':data'
 include ':app'
 rootProject.name = "eob"

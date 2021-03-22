@@ -1,9 +1,12 @@
 package pl.dguziak.detailsscreen.fragment
 
-import pl.dguziak.detailsscreen.R
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import pl.dguziak.detailsscreen.databinding.FragmentDetailsScreenBinding
 import pl.dguziak.view.fragment.BaseFragment
 
-class DetailsScreenFragment: BaseFragment() {
+class DetailsScreenFragment : BaseFragment<FragmentDetailsScreenBinding>() {
 
-    override fun provideLayoutId(): Int = R.layout.fragment_details_screen
+    override val viewBindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDetailsScreenBinding =
+        FragmentDetailsScreenBinding::inflate
 }

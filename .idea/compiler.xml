@@ -4,8 +4,11 @@
     <bytecodeTargetLevel target="1.7">
       <module name="eob.app" target="1.8" />
       <module name="eob.core" target="1.8" />
+      <module name="eob.data" target="1.8" />
       <module name="eob.detailsscreen" target="1.8" />
       <module name="eob.listscreen" target="1.8" />
+      <module name="eob.navigation" target="1.8" />
+      <module name="eob.sharedresources" target="1.8" />
       <module name="eob.splashscreen" target="1.8" />
       <module name="eob.view" target="1.8" />
     </bytecodeTargetLevel>

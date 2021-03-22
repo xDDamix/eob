@@ -4,27 +4,40 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import pl.dguziak.view.LayoutProvideable
+import pl.dguziak.view.fragment.ViewBindingInflater
 
-abstract class BaseRecyclerViewAdapter<DATA_ITEM>(
+abstract class BaseRecyclerViewAdapter<DATA_ITEM, VIEW_BINDING : ViewBinding>(
     private var dataset: MutableList<DATA_ITEM>
-) : RecyclerView.Adapter<BaseRecycleViewViewHolder<DATA_ITEM>>(), LayoutProvideable {
+) : RecyclerView.Adapter<BaseRecyclerViewAdapter.BaseViewHolder<DATA_ITEM, VIEW_BINDING>>(),
+    ViewBindingInflater<VIEW_BINDING> {
 
-    abstract override fun provideLayoutId(): Int
-    abstract fun provideViewHolder(view: View): BaseRecycleViewViewHolder<DATA_ITEM>
+    abstract fun provideViewHolder(viewBinding: VIEW_BINDING): BaseViewHolder<DATA_ITEM, VIEW_BINDING>
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseRecycleViewViewHolder<DATA_ITEM> {
-        val view = LayoutInflater.from(parent.context).inflate(provideLayoutId(), parent, false)
-
-        return provideViewHolder(view)
+    ): BaseViewHolder<DATA_ITEM, VIEW_BINDING> {
+        val viewBinding = viewBindingInflater(LayoutInflater.from(parent.context), parent, false)
+        return provideViewHolder(viewBinding)
     }
 
-    override fun onBindViewHolder(holder: BaseRecycleViewViewHolder<DATA_ITEM>, position: Int) {
+    fun changeDataset(dataset: List<DATA_ITEM>) {
+        this.dataset = dataset.toMutableList()
+        notifyDataSetChanged()
+    }
+
+    override fun onBindViewHolder(holder: BaseViewHolder<DATA_ITEM, VIEW_BINDING>, position: Int) {
         holder.bind(dataset[position])
     }
 
     override fun getItemCount(): Int = dataset.count()
+
+    abstract class BaseViewHolder<DATA_ITEM, VIEW_BINDING : ViewBinding>(
+        itemBinding: VIEW_BINDING
+    ) : RecyclerView.ViewHolder(itemBinding.root) {
+
+        abstract fun bind(data: DATA_ITEM)
+    }
 }
