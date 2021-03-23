@@ -1,0 +1,51 @@
+apply plugin:  'kotlin-android'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    buildTypes {
+        debug { }
+        qa { }
+        release { }
+    }
+
+    flavorDimensions "version"
+
+    productFlavors {
+        apiProduction {
+            dimension "version"
+        }
+        apiMocked {
+            dimension "version"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    variantFilter { variant ->
+        if(variant.buildType.name == "qa" && variant.flavors*.name.contains("apiMocked")) {
+            setIgnore(true)
+        }
+    }
+}

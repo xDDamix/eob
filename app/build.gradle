@@ -1,9 +1,19 @@
 plugins {
     id 'com.android.application'
-    id 'kotlin-android'
 }
 
+apply from: "$rootDir/build-shared.gradle"
+
 android {
+    signingConfigs {
+        eob_signing_config {
+            storeFile file('D:\\androidprojects\\eob\\key\\eob_sign.jks')
+            storePassword '123456'
+            keyAlias 'android'
+            keyPassword '123456'
+        }
+    }
+
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -18,22 +28,74 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
             minifyEnabled false
+            shrinkResources false
+        }
+        qa {
+            signingConfig android.signingConfigs.eob_signing_config
+            applicationIdSuffix ".qa"
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+        }
+        release {
+            signingConfig android.signingConfigs.eob_signing_config
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "version"
+
+    productFlavors {
+        apiProduction {
+            dimension "version"
+        }
+        apiMocked {
+            dimension "version"
+        }
+    }
+
+    variantFilter { variant ->
+        if(variant.buildType.name == "qa" && variant.flavors*.name.contains("apiMocked")) {
+            setIgnore(true)
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
 }
 
+ext {
+    applicationName = "eobuwie"
+}
+
+android.applicationVariants.all { variant ->
+    variant.outputs.all { output ->
+        def filename = "${applicationName}_${versionName}_${variant.buildType.name}.apk"
+        outputFileName = filename
+    }
+}
+
 dependencies {
     implementation project(path: ':view')
+    implementation project(path: ':splashscreen')
+    implementation project(path: ':core')
+    implementation project(path: ':data')
+    implementation project(path: ':listscreen')
+    implementation project(path: ':detailsscreen')
+    implementation project(path: ':sharedresources')
 
     // Koin AndroidX Scope features
     implementation "org.koin:koin-androidx-scope:$koin_version"
@@ -48,12 +110,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
-    implementation project(path: ':splashscreen')
-    implementation project(path: ':core')
-    implementation project(path: ':data')
-    implementation project(path: ':listscreen')
-    implementation project(path: ':detailsscreen')
-    implementation project(path: ':sharedresources')
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

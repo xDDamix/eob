@@ -1,7 +1,7 @@
 package pl.dguziak.detailsscreen.arg
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import pl.dguziak.domain.model.Todo
 
 public const val TODO_ARGS = "TodoArgs"
