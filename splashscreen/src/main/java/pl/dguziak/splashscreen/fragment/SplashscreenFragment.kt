@@ -10,7 +10,6 @@ import pl.dguziak.listscreen.fragment.ListScreenFragment
 import pl.dguziak.navigateable.FragmentChangeData
 import pl.dguziak.navigateable.FragmentTransactionType
 import pl.dguziak.navigateable.NavigateableActivityViewModel
-import pl.dguziak.splashscreen.R
 import pl.dguziak.splashscreen.databinding.FragmentSplashscreenBinding
 import pl.dguziak.splashscreen.viewmodel.SplashscreenViewModel
 import pl.dguziak.view.fragment.BaseFragment

@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import pl.dguziak.domain.model.Todo
 
-public const val TODO_ARGS = "TodoArgs"
+const val TODO_ARGS = "TodoArgs"
 
 @Parcelize
 class TodoArgs(

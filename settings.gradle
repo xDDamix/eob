@@ -1,6 +1,5 @@
 include ':sharedresources'
 include ':data'
-include ':navigation'
 include ':core'
 include ':view'
 include ':listscreen'

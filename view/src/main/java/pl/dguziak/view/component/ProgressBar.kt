@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.View
 import pl.dguziak.view.R
 
-
 class ProgressBar constructor(
     context: Context?,
     attrs: AttributeSet?

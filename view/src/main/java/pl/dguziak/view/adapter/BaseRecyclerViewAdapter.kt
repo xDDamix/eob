@@ -1,11 +1,9 @@
 package pl.dguziak.view.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import pl.dguziak.view.LayoutProvideable
 import pl.dguziak.view.fragment.ViewBindingInflater
 
 abstract class BaseRecyclerViewAdapter<DATA_ITEM, VIEW_BINDING : ViewBinding>(

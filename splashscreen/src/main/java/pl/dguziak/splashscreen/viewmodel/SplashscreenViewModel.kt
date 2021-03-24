@@ -1,6 +1,5 @@
 package pl.dguziak.splashscreen.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,7 +8,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pl.dguziak.core.BaseViewModel
-import kotlin.system.measureTimeMillis
 
 private const val SPLASHSCREEN_VISIBILITY_MS = 5000L
 
