@@ -1,5 +1,7 @@
 apply plugin:  'kotlin-android'
 
+apply from: "$rootDir/versions.gradle"
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"

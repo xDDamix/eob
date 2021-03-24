@@ -9,6 +9,7 @@ import pl.dguziak.navigateable.FragmentChangeData
 import pl.dguziak.navigateable.NavigateableActivityViewModel
 import pl.dguziak.view.LayoutProvideable
 
+//todo: ViewBinding
 abstract class BaseActivity : FragmentActivity(), LayoutProvideable, ContainerProvideable,
     NavigateableActivity {
 
@@ -20,8 +21,6 @@ abstract class BaseActivity : FragmentActivity(), LayoutProvideable, ContainerPr
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(provideLayoutId())
-
-        Log.d("EOApp", " BaseActivity onCreate $navigateableActivityViewModel")
 
         setupListeners()
     }
@@ -41,7 +40,6 @@ abstract class BaseActivity : FragmentActivity(), LayoutProvideable, ContainerPr
         )
     }
 
-    //todo: apply
     fun changeFragment(
         fragment: Fragment,
         containerId: Int,
@@ -49,18 +47,20 @@ abstract class BaseActivity : FragmentActivity(), LayoutProvideable, ContainerPr
         withBackStack: Boolean = true,
         fragmentTag: String? = fragment::class.simpleName
     ) {
-        val transaction = supportFragmentManager.beginTransaction()
-        if (transactionType == pl.dguziak.navigateable.FragmentTransactionType.ADD) {
-            transaction.add(containerId, fragment, fragmentTag)
-        } else if (transactionType == pl.dguziak.navigateable.FragmentTransactionType.REPLACE) {
-            transaction.replace(containerId, fragment, fragmentTag)
+        supportFragmentManager.beginTransaction().apply {
+            if (transactionType == pl.dguziak.navigateable.FragmentTransactionType.ADD) {
+                add(containerId, fragment, fragmentTag)
+            } else if (transactionType == pl.dguziak.navigateable.FragmentTransactionType.REPLACE) {
+                replace(containerId, fragment, fragmentTag)
+            }
+
+            if (withBackStack) {
+                addToBackStack(fragmentTag)
+            }
+
+            commit()
         }
 
-        if (withBackStack) {
-            transaction.addToBackStack(fragmentTag)
-        }
-
-        transaction.commit()
     }
 }
 

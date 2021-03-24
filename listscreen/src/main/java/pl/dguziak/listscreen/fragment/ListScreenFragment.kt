@@ -5,20 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.dguziak.detailsscreen.arg.toArgs
 import pl.dguziak.detailsscreen.fragment.DetailsScreenFragment
 import pl.dguziak.domain.model.Todo
-import pl.dguziak.listscreen.R
 import pl.dguziak.listscreen.adapter.DataListAdapter
 import pl.dguziak.listscreen.databinding.FragmentListScreenBinding
 import pl.dguziak.listscreen.viewmodel.ListScreenViewModel
 import pl.dguziak.navigateable.FragmentChangeData
 import pl.dguziak.navigateable.FragmentTransactionType
 import pl.dguziak.navigateable.NavigateableActivityViewModel
-import pl.dguziak.view.adapter.BaseRecyclerViewAdapter
 import pl.dguziak.view.fragment.BaseFragment
 
 //todo: LayoutProvideable to delete

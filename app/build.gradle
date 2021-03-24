@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
 }
 
+apply from: "$rootDir/versions.gradle"
 apply from: "$rootDir/build-shared.gradle"
 
 android {
@@ -37,15 +38,15 @@ android {
         qa {
             signingConfig android.signingConfigs.eob_signing_config
             applicationIdSuffix ".qa"
-            debuggable false
-            minifyEnabled true
-            shrinkResources true
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
         }
         release {
             signingConfig android.signingConfigs.eob_signing_config
-            debuggable false
-            minifyEnabled true
-            shrinkResources true
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -82,8 +83,10 @@ ext {
 }
 
 android.applicationVariants.all { variant ->
+    def flavorName = variant.name.substring(0, variant.name.length() - variant.buildType.name.length())
+
     variant.outputs.all { output ->
-        def filename = "${applicationName}_${versionName}_${variant.buildType.name}.apk"
+        def filename = "${applicationName}_${versionName}_${flavorName}_${variant.buildType.name}.apk"
         outputFileName = filename
     }
 }

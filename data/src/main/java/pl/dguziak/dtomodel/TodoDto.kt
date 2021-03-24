@@ -1,8 +1,9 @@
 package pl.dguziak.dtomodel
 
+import com.squareup.moshi.JsonClass
 import pl.dguziak.domain.model.Todo
 
-
+@JsonClass(generateAdapter = true)
 data class TodoDto(
     val userId: Long,
     val id: Long,

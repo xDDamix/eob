@@ -1,0 +1,9 @@
+ext {
+    kotlin_version = '1.4.31'
+    koin_version = '2.2.2'
+    lifecycle_version = '2.3.0'
+    arch_version = '2.1.0'
+    retrofit_version = '2.9.0'
+    converter_moshi_version = '2.4.0'
+    moshi_version = '1.11.0'
+}

@@ -1,6 +1,5 @@
 package pl.dguziak.listscreen.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -11,7 +10,6 @@ import pl.dguziak.core.BaseViewModel
 import pl.dguziak.domain.model.Todo
 import pl.dguziak.domain.usecase.GetTodosUseCase
 
-//todo: make public get
 class ListScreenViewModel(
     private val getTodosUseCase: GetTodosUseCase
 ) : BaseViewModel() {

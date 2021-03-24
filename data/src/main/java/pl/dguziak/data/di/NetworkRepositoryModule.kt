@@ -1,5 +1,7 @@
 package pl.dguziak.data.di
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.qualifier
@@ -24,7 +26,9 @@ val networkRepositoryModule = module {
     single<DataRepository> { DataRepositoryImpl(get()) }
 }
 
-fun provideMoshiConverterFactory(): Converter.Factory = MoshiConverterFactory.create()
+fun provideMoshiConverterFactory(): Converter.Factory = MoshiConverterFactory.create(
+    Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+)
 
 fun provideOkHttpClient(): OkHttpClient = OkHttpClient().newBuilder().build()
 
