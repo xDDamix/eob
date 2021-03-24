@@ -38,15 +38,15 @@ android {
         qa {
             signingConfig android.signingConfigs.eob_signing_config
             applicationIdSuffix ".qa"
-            debuggable true
-            minifyEnabled false
-            shrinkResources false
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
         }
         release {
             signingConfig android.signingConfigs.eob_signing_config
-            debuggable true
-            minifyEnabled false
-            shrinkResources false
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
